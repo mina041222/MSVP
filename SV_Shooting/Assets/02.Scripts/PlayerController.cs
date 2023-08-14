@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
 
     public Animator Player;        //1. 선언 해주기
 
+    public GameObject bullet;
+    public Transform bulletPoint;
+
+    public float TimeDelay;
+    private float TimeCounter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +40,23 @@ public class PlayerController : MonoBehaviour
                                                transform.position.z);   //Mathf.Clamp 뜻은 최소값과 최대값안의 범위 이외의 값을 넘지 않게 한다
 
         Player.SetFloat("Movement",moveInput.y);      //3. Movement에 moveinput y축 수치를 넣기! 히ㅣ히  
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(bullet, bulletPoint.position, bulletPoint.rotation);
+            TimeCounter = TimeDelay;
+        }
+
+        if(Input.GetButton("Fire1"))
+        {
+            TimeCounter -= Time.deltaTime;
+            
+            if (TimeCounter <= 0)
+            {
+                Instantiate(bullet, bulletPoint.position, bulletPoint.rotation);
+                TimeCounter = TimeDelay;
+            }
+            
+        }
     }
 }

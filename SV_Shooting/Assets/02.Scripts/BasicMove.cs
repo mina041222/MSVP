@@ -8,6 +8,8 @@ public class BasicMove : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public float rotateSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +20,8 @@ public class BasicMove : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(moveSpeed, 0);  //vector2가 크기와 속력을 가지는거 / x = moveSpeed
+
+        transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + (rotateSpeed * Time.deltaTime * Random.Range(rotateSpeed/3f, rotateSpeed)));  
     }
+
 }
